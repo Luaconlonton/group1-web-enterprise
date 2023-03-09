@@ -1,0 +1,66 @@
+<html lang="en">
+
+{{> head}}
+
+<body class="sb-nav-fixed">
+    {{> adminHeader}}
+
+    <div class="container py-5" style="margin-top: 4%; margin-left: 15%">
+            <div class="form-group">
+                <label style="margin-left: 25%;">Search by Name:</label>
+                <div class="input-group">
+                    <form class="form btn-group align-top" method="post" action="/admin/searchCategory"
+                        style="margin-left: 25%; width: 40%;  flex: none;">
+                        <input type="search" name="keyword" class="form-control rounded" placeholder="Search by name "
+                            aria-label="Search" aria-describedby="search-addon" />
+                        <button type="submit" class="btn btn-success">Search</button>
+                    </form>
+                </div>
+            </div>
+        <div class="e-panel card">
+            <div class="card-body">
+                <div class="card-title">
+                </div>
+                <div class="e-table">
+                    <div class="table-responsive table-lg mt-3">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Date Start</th>
+                                    <th>Date End</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each listCategory}}
+                                <tr>
+                                    <td class="text-nowrap align-middle">
+                                        <a href="/admin/viewCategoryDetail?id={{_id}}">{{name}}</a>
+                                    </td>
+                                    <td class="text-nowrap align-middle">{{description}}</td>
+                                    <td class="text-nowrap align-middle"><span>{{dateFormat dateStart
+                                            "YYYY-MM-DD"}}</span></td>
+                                    <td class="text-nowrap align-middle"><span>{{dateFormat dateEnd
+                                            "YYYY-MM-DD"}}</span></td>
+                                    <td class="text-center align-middle">
+                                        <div class="btn-group align-top">
+                                            <a href="/admin/category/edit?id={{id}}" class="btn btn-success">
+                                                <span class="glyphicon glyphicon-edit"></span>
+                                                <span><strong>Edit date</strong></span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

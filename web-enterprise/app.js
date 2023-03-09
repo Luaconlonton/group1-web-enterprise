@@ -41,7 +41,6 @@ hbs.registerHelper('plus', function(arg1, arg2, options) {
     return Number(arg1) + Number(arg2);
 });
 app.use(express.static(__dirname + '/public'));
-
 app.get('/', (req, res) => {
     res.render('index')
 });
@@ -49,14 +48,14 @@ app.get('/', (req, res) => {
 const authRoute = require("./routes/auth")
 var adminRoute = require('./routes/admin');
 var qamRoute = require('./routes/qam');
-// var staffRoute = require('./routes/staff');
-// const qacRoute = require('./routes/qac');
+var staffRoute = require('./routes/staff');
+const qacRoute = require('./routes/qac');
 
 app.use("/", authRoute);
-app.use('/admin', adminRoute);
-app.use('/qam', qamRoute);
-// app.use('/staff', staffRoute);
-// app.use('/qac', qacRoute);
+app.use('/', adminRoute);
+app.use('/', qamRoute);
+app.use('/', staffRoute);
+app.use('/', qacRoute);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT);

@@ -1,0 +1,33 @@
+<html lang="en">
+
+{{> head}}
+
+<body class="sb-nav-fixed">
+    {{> qamHeader}}
+    <div id="container" style="width: 70%; height: 80%; margin: 4% 15%; padding: 0;"></div>
+
+</body>
+
+<script type="text/javascript">
+    anychart.onDocumentReady(function () {
+        // set the data
+        let data = [];
+        data = {{{ data }}}
+    console.log(data)
+    // create the chart
+    var chart = anychart.pie();
+    // set the chart title
+    chart.title("Dashboard number of People");
+    // add the data
+    chart.data(data);
+    // set legend position
+    chart.legend().position("right");
+    // set items layout
+    chart.legend().itemsLayout("vertical");
+    // display the chart in the container
+    chart.container('container');
+    chart.draw();
+    });
+</script>
+
+</html>
