@@ -6,6 +6,13 @@ const app = express();
 app.set('view engine', 'hbs');
 var hbs = require('hbs');
 
+hbs.registerHelper("json", function(context) {
+    return JSON.stringify(context)
+})
+app.use(express.json())
+app.use(express.urlencoded({
+    extended: true
+}))
 app.use(session({
     secret: '2C44-4D44-WppQ38S',
     resave: true,

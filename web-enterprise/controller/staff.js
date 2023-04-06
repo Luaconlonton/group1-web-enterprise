@@ -1063,6 +1063,7 @@ exports.viewMostViewedIdeas = async(req, res) => {
 exports.filterMostViewIdeas = async function(req, res) {
     let listIdeas = await idea.find().populate('comments');
     let n_ideas = listIdeas.length;
+
     let n_last = Number(req.body.last);
     let n_times = n_last;
     if (n_last > n_ideas) {

@@ -52,7 +52,7 @@
         <div class="col" style="margin: 5% 30%;">
             <h1 class="display-1 font-weight-bold" style="text-align:center">Most Viewed Ideas</h1>
             <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Most by ↓</button>
+                <button onclick="myFunction()" class="dropbtn">Sort by ↓</button>
                 <div id="myDropdown" class="dropdown-content">
                     <form action="/staff/mostViewedIdeas" method="POST">
                         <input type="submit" name="last" value="5">
@@ -65,6 +65,7 @@
                     </form>
                 </div>
             </div>
+            
             {{#each mostViewedIdeas}}
             <div class="container py-5" style="margin-bottom: 3% ; background-color: rgba(225, 230, 238, 0.481);">
                 <div class="row">

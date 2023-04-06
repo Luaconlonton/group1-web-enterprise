@@ -462,44 +462,9 @@ exports.downloadCSV = async(req, res) => {
 }
 
 exports.numberOfIdeasByYear = async(req, res) => {
-    let yearStart = 2020;
-    let yearEnd = 2022;
-    if (req.body == {}) {
-        //console.log(req.body)
-        yearStart = parseInt(req.body.from);
-        yearEnd = parseInt(req.body.to);
-    }
-    let dateStart;
-    let dateEnd;
-    let listYear = [];
-    let i = yearStart;
-    async function loop() {
-        if (i <= yearEnd) {
-            dateStart = new Date(i + "-01-01");
-            dateEnd = new Date(i + "-12-31");
-            console.log(dateEnd)
-            let noIdeas = await idea.find({
-                "time": {
-                    $gte: dateStart,
-                    $lt: dateEnd
-                }
-            }).count();
-            // console.log(i);
-            // console.log(noIdeas);
-            listYear.push({
-                x: i,
-                value: noIdeas
-            })
-            i += 1;
-            // console.log(listYear);
-            loop();
 
-        } else {
-            console.log(listYear);
-            res.render('qam/numberOfIdeasByYear', { listYear: JSON.stringify(listYear), loginName: req.session.email })
-        }
-    }
-    loop();
+    let noIdeas = await idea.find({});
+    res.render('qam/numberOfIdeasByYear', { listYear: JSON.stringify(noIdeas), loginName: req.session.email })
 }
 
 exports.numberOfIdeasByYear2 = async(req, res) => {
