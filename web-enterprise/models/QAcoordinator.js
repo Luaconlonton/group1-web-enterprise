@@ -1,26 +1,30 @@
 const mongoose = require('../db/db');
 
 const QAcoordinatorSchema = new mongoose.Schema({
-    name: { 
+    name: {
         type: String,
         required: true
     },
-    email:{
+    email: {
         type: String,
         required: true,
         unique: true
     },
-    dateOfBirth:{
+    dateOfBirth: {
         type: Date,
         required: true
     },
-    address:{
+    address: {
         type: String,
         required: true
     },
     img: {
         type: String,
         default: "user.png"
+    },
+    department: {
+        type: String,
+        default: ""
     }
 });
 

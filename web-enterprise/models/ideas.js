@@ -2,11 +2,11 @@ const mongoose = require('../db/db');
 
 const ideas = new mongoose.Schema({
     categoryID: {
-        type: mongoose.Schema.Types.ObjectId, 
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'category',
-        require : true
-    }, 
-    name: { 
+        require: true
+    },
+    name: {
         type: String,
         required: true
     },
@@ -14,32 +14,35 @@ const ideas = new mongoose.Schema({
         type: String,
         required: true
     },
-    author:{
-        type: mongoose.Schema.Types.ObjectId, 
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Staff',
-        require : true
+        require: true
     },
-    time:{
+    time: {
         type: Date,
         default: Date.now()
     },
-    like: { 
+    like: {
         type: Number,
         required: true
     },
-    dislike:{
+    dislike: {
         type: Number,
         required: true
     },
-    comments:[{
-        type: mongoose.Schema.Types.ObjectId, 
+    comments: [{
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'comments'
     }],
     annonymously: {
         type: Boolean,
-        require : true,
+        require: true,
         default: false
     },
+    department: {
+        type: String
+    }
 });
 
 module.exports = mongoose.model('ideas', ideas);

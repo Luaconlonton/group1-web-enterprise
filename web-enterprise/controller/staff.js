@@ -47,7 +47,7 @@ exports.doAddIdea = async(req, res) => {
     const fs = require("fs");
     let aStaff = await Staff.findOne({ email: req.session.email });
     let ideaName = req.body.name;
-    req.body.name = req.body.name.replace(" ", "_");
+    req.body.name = req.body.name.replaceAll(" ", "_");
     var idCategory = req.body.idCategory;
     let aCategory = await category.findById(idCategory);
     let path = aCategory.url + '/' + req.body.name;

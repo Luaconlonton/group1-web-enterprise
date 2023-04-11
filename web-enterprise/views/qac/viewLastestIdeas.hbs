@@ -47,24 +47,26 @@
 {{> head}}
 
 <body class="sb-nav-fixed">
-    {{> qacHeader}}
+    {{> staffHeader}}
     <div class="row">
         <div class="col" style="margin: 5% 30%;">
-            {{#ifEquals distance5_ideas.length 0}}
-            {{else}}
+            <h1 class="display-1 font-weight-bold" style="text-align:center">Most Viewed Ideas</h1>
             <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Latest by ↓</button>
+                <button onclick="myFunction()" class="dropbtn" style="border-radius: 15px; background-color:crimson">Sort by ↓</button>
                 <div id="myDropdown" class="dropdown-content">
-                    <form action="/qac/viewLastestIdeas" method="POST">
-                        {{#each distance5_ideas}}
-                        <input type="submit" name="last" value="{{this}}">
+                    <form action="/staff/mostViewedIdeas" method="POST">
+                        <input type="submit" name="last" value="5">
                         <br>
-                        {{/each}}
+                        <input type="submit" name="last" value="10">
+                        <br>
+                        <input type="submit" name="last" value="15">
+                        <br>
+                        <input type="submit" name="last" value="20">
                     </form>
                 </div>
             </div>
-            {{/ifEquals}}
-            {{#each lastestIdeas}}
+            
+            {{#each mostViewedIdeas}}
             <div class="container py-5" style="margin-bottom: 3% ; background-color: rgba(225, 230, 238, 0.481);">
                 <div class="row">
                     <div class="col">
@@ -191,6 +193,7 @@
             {{/each}}
         </div>
     </div>
+
 </body>
 <script>
     /* When the user clicks on the button, 

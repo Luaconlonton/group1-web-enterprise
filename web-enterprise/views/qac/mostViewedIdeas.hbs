@@ -53,7 +53,7 @@
             {{#ifEquals distance5_ideas.length 0}}
             {{else}}
             <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Most by ↓</button>
+                <button onclick="myFunction()" class="dropbtn" style="border-radius: 15px; background-color:crimson">Most by ↓</button>
                 <div id="myDropdown" class="dropdown-content">
                     <form action="/qac/viewMostComments" method="POST">
                         {{#each distance5_ideas}}

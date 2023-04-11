@@ -2,7 +2,7 @@
 <html lang="en">
 {{> head}}
 
-<body>
+body>
   <section class="vh-100" style="background:#eeeef2;">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -50,5 +50,20 @@
     </div>
   </section>
 </body>
+<script>
+  async function login() {
+    const res= await axios({
+      url: window.location.origin+ "/api/login",
+      method: "post",
+      data: {
+        username: document.getElementById("form2Example17").value,
+        password: document.getElementById("form2Example27").value
+      }
+    })
+    const result= await res.data
+    return result
+  }
+
+</script>
 
 </html>

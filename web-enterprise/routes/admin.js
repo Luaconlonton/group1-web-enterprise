@@ -95,8 +95,10 @@ router.post('/admin/searchCategory', isAdmin, adminController.searchCategory);
 router.get('/admin/category/edit', isAdmin, adminController.editDate);
 router.post('/admin/doEditCategory', isAdmin, adminController.doEditDate);
 
-
 router.get('/admin/viewSubmittedIdeas', isAdmin, adminController.viewSubmittedIdeas);
 router.get('/admin/viewCategoryDetail', isAdmin, adminController.viewCategoryDetail);
 router.post('/admin/viewCategoryDetail', isAdmin, adminController.viewCategoryDetail);
+
+router.get("/admin/getCategory", adminController.getCategory)
+
 module.exports = router;

@@ -176,14 +176,16 @@ exports.doAddQAcoordinator = async(req, res) => {
             email: req.body.email,
             dateOfBirth: new Date(req.body.date),
             address: req.body.address,
-            img: req.file.filename
+            img: req.file.filename,
+            department: req.body.department
         })
     } else {
         newQAcoordinator = new QAcoordinator({
             name: req.body.name,
             email: req.body.email,
             dateOfBirth: new Date(req.body.date),
-            address: req.body.address
+            address: req.body.address,
+            department: req.body.department
         })
     }
     let newAccount = new Account({
@@ -279,7 +281,8 @@ exports.doAddStaff = async(req, res) => {
             dateOfBirth: new Date(req.body.date),
             address: req.body.address,
             img: req.file.filename,
-            type: req.body.department
+            type: req.body.department,
+            department: req.body.department
         })
     } else {
         newStaff = new Staff({
@@ -287,7 +290,8 @@ exports.doAddStaff = async(req, res) => {
             email: req.body.email,
             dateOfBirth: new Date(req.body.date),
             address: req.body.address,
-            type: req.body.department
+            type: req.body.department,
+            department: req.body.department
         })
     }
     let newAccount = new Account({
@@ -327,6 +331,7 @@ exports.doEditStaff = async(req, res) => {
         aStaff.name = req.body.name;
         aStaff.dateOfBirth = new Date(req.body.date);
         aStaff.address = req.body.address;
+        aStaff.type = req.body.department
         aStaff.type = req.body.department
         aStaff = await aStaff.save();
         res.redirect('/admin/viewStaff');
@@ -547,3 +552,8 @@ exports.viewCategoryDetail = async(req, res) => {
         res.render('admin/viewCategoryDetail', { idCategory: id, listFiles: listFiles, compare: compare, sortBy: sortBy, noPage: noPage, page: page, loginName: req.session.email });
     }
 }
+const asyncHandler = require('express-async-handler')
+exports.getCategory = asyncHandler(async(req, res) => {
+    const lCategories = await category.find({})
+    return res.status(200).json(lCategories)
+})

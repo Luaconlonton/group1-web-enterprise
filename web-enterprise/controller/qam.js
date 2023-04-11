@@ -9,6 +9,7 @@ const AdmZip = require('adm-zip');
 var mongoose = require('mongoose');
 const fs = require("fs");
 const fsPromises = fs.promises;
+const zipFolder = require('zip-folder');
 
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
@@ -399,22 +400,28 @@ exports.getMostViewed = async(req, res) => {
 }
 
 exports.downloadZip = async(req, res) => {
-    const fs = require("fs");
     let id = req.query.id;
     let aCategory = await Category.findById(id);
-    let folderpath = (__dirname.slice(0, -10) + aCategory.url)
-
-    var zp = new AdmZip();
-    zp.addLocalFolder(folderpath);
-    // here we assigned the name to our downloaded file!
-    const file_after_download = 'downloaded_file.zip';
-    // toBuffer() is used to read the data and save it
-    // for downloading process!
-    const data = zp.toBuffer();
-    res.set('Content-Type', 'application/octet-stream');
-    res.set('Content-Disposition', `attachment; filename=${file_after_download}`);
-    res.set('Content-Length', data.length);
-    res.send(data);
+    fs.writeFileSync("./file.txt", JSON.stringify(aCategory), (err) => {
+        if (err) {
+            console.error(err)
+            return
+        }
+        console.log('Data written to file successfully!');
+    })
+    const zipPath = './my-folder.zip';
+    zipFolder("file.txt", zipPath, function(err) {
+        if (err) {
+            console.log('Lỗi khi nén tệp: ', err);
+        } else {
+            console.log('Đã nén tệp thành công!');
+            // Thiết lập header để tải xuống tệp zip
+            res.setHeader('Content-Type', 'application/zip');
+            res.setHeader('Content-Disposition', 'attachment; filename=my-folder.zip');
+            // Tải xuống tệp zip
+        }
+        return res.download(zipPath)
+    });
 }
 
 exports.downloadCSV = async(req, res) => {

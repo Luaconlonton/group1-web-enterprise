@@ -1,3 +1,4 @@
+const expressAsyncHandler = require('express-async-handler');
 const Account = require('../models/user');
 const bcrypt = require('bcryptjs');
 
@@ -48,3 +49,26 @@ exports.handleLogout = async(req, res) => {
     req.session.destroy();
     res.redirect('/');
 }
+
+exports.login = expressAsyncHandler(async(req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    // console.log(username)
+    try {
+        let user = await Account.findOne({ email: username });
+        if (!user) {
+            return res.render('index', { errors: 'Username or password is incorrect' });
+        };
+        // console.log(user)
+        await bcrypt.compare(password, user.password).then((doMatch) => {
+            if (doMatch) {
+                return res.status(200).json({ email: email, login: true })
+            } else {
+                return res.status(200).json('index', { errors: 'Username or password is incorrect' })
+            }
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(200).json({ errors: 'Username or password is incorrect' });
+    }
+})

@@ -1,20 +1,20 @@
 const mongoose = require('../db/db');
 
 const staffSchema = new mongoose.Schema({
-    name: { 
+    name: {
         type: String,
         required: true
     },
-    email:{
+    email: {
         type: String,
         required: true,
         unique: true
     },
-    dateOfBirth:{
+    dateOfBirth: {
         type: Date,
         required: true
     },
-    address:{
+    address: {
         type: String,
         required: true
     },
@@ -25,6 +25,10 @@ const staffSchema = new mongoose.Schema({
     type: {
         type: String,
         required: true
+    },
+    department: {
+        type: String,
+        default: ""
     }
 });
 
